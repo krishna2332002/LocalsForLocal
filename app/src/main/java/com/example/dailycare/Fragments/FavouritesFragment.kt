@@ -37,12 +37,13 @@ class FavouritesFragment : Fragment() {
         favouriteAdapter= FavouriteAdapter(requireContext(),favouritesList)
         binding.favouritesListView.layoutManager= LinearLayoutManager(context)
         binding.favouritesListView.adapter=favouriteAdapter
-        database.child("Profile").child(usersUid).child("Favourites")
-            .limitToLast(20).addValueEventListener(object :
+        database.child("Profile").child(usersUid).child("Favourites").addValueEventListener(object :
                 ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.childrenCount==x){
-                        Toast.makeText(context, "No Current Notification", Toast.LENGTH_SHORT).show()
+                        binding.noDataFoundImg.visibility=View.VISIBLE
+                        binding.noDataFoundText.visibility=View.VISIBLE
+                        binding.favouritesListView.visibility=View.GONE
                     }
                     else{
                         favouritesList.clear()
@@ -52,7 +53,9 @@ class FavouritesFragment : Fragment() {
                                 favouritesList.add(favourite)
                             }
                         }
-                        favouritesList.reverse()
+                        binding.noDataFoundImg.visibility=View.GONE
+                        binding.noDataFoundText.visibility=View.GONE
+                        binding.favouritesListView.visibility=View.VISIBLE
                         favouriteAdapter.notifyDataSetChanged()
                     }
                 }

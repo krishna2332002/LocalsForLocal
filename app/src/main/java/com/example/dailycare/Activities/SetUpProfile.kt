@@ -14,14 +14,25 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.dailycare.R
 import com.example.dailycare.databinding.ActivitySetUpProfileBinding
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
+import com.google.android.gms.location.LocationRequest.create
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.lang.ref.Cleaner.create
 import java.util.*
 
 class SetUpProfile : AppCompatActivity() {
+    companion object {
+        const val LOCATION_PERMISSION_REQUEST_CODE = 1001
+    }
     private lateinit var binding: ActivitySetUpProfileBinding
     private lateinit var database: DatabaseReference
     private lateinit var fAuth: FirebaseAuth
@@ -37,19 +48,21 @@ class SetUpProfile : AppCompatActivity() {
     private lateinit var stateAdapter: ArrayAdapter<CharSequence>
     private lateinit var districtAdapter: ArrayAdapter<CharSequence?>
     private var pincode:String=""
+    private lateinit var value:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySetUpProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         fAuth = FirebaseAuth.getInstance()
-        Toast.makeText(this, "Hi", Toast.LENGTH_SHORT).show()
+        value=intent.getStringExtra("Value").toString()
         database = FirebaseDatabase.getInstance().getReference()
         var userUid=fAuth.currentUser!!.uid
         requestLocationPermission()
+        getLocation()
         database.child("Profile").child(userUid).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists())
+                if(snapshot.exists() && value=="0")
                 {
                     var intent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(intent)
@@ -260,28 +273,32 @@ class SetUpProfile : AppCompatActivity() {
                         launchGallery()
                     }
                     binding.updateBtn.setOnClickListener {
+                        Toast.makeText(this@SetUpProfile, pincode, Toast.LENGTH_SHORT).show()
                         if(!LiveLocationPermissionCheck()){
                             Toast.makeText(this@SetUpProfile, "Enable your Live location Permission", Toast.LENGTH_SHORT).show()
                             requestLocationPermission()
-                        }else if(pincode=="")
+                        }else if(binding.userAddress.text.toString().isEmpty())
                         {
-                            Toast.makeText(this@SetUpProfile,"Wait!! Fetching Live Location",Toast.LENGTH_SHORT).show()
+                            getLocation()
+                            Toast.makeText(this@SetUpProfile,"Enter Your Pincode",Toast.LENGTH_SHORT).show()
+                            binding.userAddress.setError("Pincode is required")
+                            return@setOnClickListener
                         }
                         else if (selectedState == "Select Your State") {
                             Toast.makeText(this@SetUpProfile, "Please select your state from the list", Toast.LENGTH_LONG).show()
                             tvStateSpinner.setError("State is required!") //To set error on TextView
                             tvStateSpinner.requestFocus()
+                            return@setOnClickListener
                         } else if (selectedDistrict == "Select Your District") { Toast.makeText(this@SetUpProfile, "Please select your district from the list", Toast.LENGTH_LONG).show()
                             tvDistrictSpinner.setError("District is required!")
                             tvDistrictSpinner.requestFocus()
                             tvStateSpinner.setError(null)
+                            return@setOnClickListener
                         }
-                        else{
-                            tvStateSpinner.setError(null)
-                            tvDistrictSpinner.setError(null)
-                            Toast.makeText(this@SetUpProfile, "Selected State: $selectedState\nSelected District: $selectedDistrict", Toast.LENGTH_LONG).show()
-                        }
-                        if (selectedImage != null) {
+                        else if (selectedImage != null) {
+                        tvStateSpinner.setError(null)
+                        tvDistrictSpinner.setError(null)
+                            pincode=binding.userAddress.text.toString().trim()
                             reference = FirebaseStorage.getInstance().getReference().child("Profile").child(fAuth.currentUser!!.uid)
                             reference.putFile(selectedImage!!).addOnCompleteListener(
                                 OnCompleteListener {
@@ -318,6 +335,9 @@ class SetUpProfile : AppCompatActivity() {
                                 }
                             })
                         } else {
+                            tvStateSpinner.setError(null)
+                            tvDistrictSpinner.setError(null)
+                            pincode=binding.userAddress.text.toString().trim()
                             user = mapOf<String, String>(
                                 "usersUid" to userUid.toString().trim(),
                                 "address" to binding.userAddress.text.toString().trim(),
@@ -368,11 +388,11 @@ class SetUpProfile : AppCompatActivity() {
         startActivityForResult(intent, 100)
     }
     private fun requestLocationPermission() {
-        if (LiveLocationPermissionCheck()) {
+        if (!LiveLocationPermissionCheck()) {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                MainActivity.LOCATION_PERMISSION_REQUEST_CODE
+                LOCATION_PERMISSION_REQUEST_CODE
             )
         } else {
             getLocation()
@@ -389,9 +409,7 @@ class SetUpProfile : AppCompatActivity() {
                 val longitude = location.longitude
                 val address = getAddress(latitude, longitude)
                 pincode = address?.postalCode.toString()
-                Toast.makeText(applicationContext, pincode, Toast.LENGTH_SHORT).show()
             }
-
             override fun onProviderEnabled(provider: String) {}
             override fun onProviderDisabled(provider: String) {}
             override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}

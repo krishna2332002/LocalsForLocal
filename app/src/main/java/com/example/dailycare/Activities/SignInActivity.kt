@@ -70,12 +70,8 @@ class SignInActivity : AppCompatActivity() {
         fauth.signInWithCredential(credential)
             .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(
-                        this,
-                        "Ok",
-                        Toast.LENGTH_LONG
-                    ).show()
                     val i = Intent(this, SetUpProfile::class.java)
+                    i.putExtra("Value","0");
                     startActivity(i)
                     finish()
                 } else {

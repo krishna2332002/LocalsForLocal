@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="Service Provider Id:12345abc"
+                    android:text="Experience: 0 Years"
                     android:textColor="@color/lightBlack"
                     android:textSize="18dp" />
                 <TextView
@@ -86,8 +86,9 @@
                     android:layout_marginTop="12dp"
                     android:orientation="horizontal">
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="180dp"
+                        android:layout_width="0dp"
                         android:layout_height="40dp"
+                        android:layout_weight="0.5"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="8dp"
                         android:background="@drawable/gray_background">
@@ -123,8 +124,9 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="180dp"
+                        android:layout_width="0dp"
                         android:layout_height="40dp"
+                        android:layout_weight="0.5"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="8dp"
                         android:background="@drawable/gray_background">
@@ -210,8 +212,41 @@
                         android:textSize="24sp"
                         android:textStyle="bold" />
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/addToFavouriteServiceProvider"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="15dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/sentbox"
+                    android:drawablePadding="5dp"
+                    android:elevation="8dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Add to Favourite"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/removeFavouriteServiceProvider"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="15dp"
+                    android:layout_weight="0.5"
+                    android:visibility="gone"
+                    android:background="@drawable/sentbox"
+                    android:drawablePadding="5dp"
+                    android:elevation="8dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Remove From Favourite"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
             </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

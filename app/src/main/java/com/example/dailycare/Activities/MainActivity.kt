@@ -13,10 +13,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.dailycare.Fragments.FavouritesFragment
-import com.example.dailycare.Fragments.HomeFragment
-import com.example.dailycare.Fragments.NotificationsFragment
-import com.example.dailycare.Fragments.ProfileFragment
+import com.example.dailycare.Fragments.*
 import com.example.dailycare.R
 import com.example.dailycare.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -26,9 +23,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        const val LOCATION_PERMISSION_REQUEST_CODE = 1001
-    }
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var database: DatabaseReference
     private lateinit var fauth: FirebaseAuth
@@ -37,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var profileFragment: ProfileFragment
     private lateinit var favouriteFragment: FavouritesFragment
     private lateinit var notificationFragment: NotificationsFragment
+    private lateinit var chatFragment: ChatFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -51,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         profileFragment = ProfileFragment()
         notificationFragment=NotificationsFragment()
         favouriteFragment=FavouritesFragment()
+        chatFragment=ChatFragment()
         setCurrentFragment(homeFragment)
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -66,8 +63,8 @@ class MainActivity : AppCompatActivity() {
                     setCurrentFragment(favouriteFragment)
                     currentFragment=3
                 }
-                R.id.notifications->{
-                    setCurrentFragment(notificationFragment)
+                R.id.chat->{
+                    setCurrentFragment(chatFragment)
                     currentFragment=4
                 }
             }

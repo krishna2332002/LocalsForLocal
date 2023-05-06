@@ -1,11 +1,13 @@
 package com.example.dailycare.Adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.dailycare.Activities.ShowServiceProviders
 import com.example.dailycare.Models.Service
 import com.example.dailycare.R
 import kotlinx.android.synthetic.main.service_view_holder.view.*
@@ -30,6 +32,11 @@ class ServiceAdapter (
                 .override(1000, 1000)
                 .placeholder(R.drawable.burger)
                 .into(servicePic)
+        }
+        holder.itemView.setOnClickListener {
+            var intent= Intent(context,ShowServiceProviders::class.java)
+            intent.putExtra("serviceName",service.title)
+            context.startActivity(intent)
         }
     }
 

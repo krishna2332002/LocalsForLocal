@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.ProfileFragment">
@@ -64,7 +65,7 @@
                     android:textColor="@color/black"
                     android:text="+1111111111" />
                 <TextView
-                    android:id="@+id/userId"
+                    android:id="@+id/userAge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -72,7 +73,7 @@
                     android:textStyle="normal"
                     android:layout_marginTop="4dp"
                     android:textColor="@color/black"
-                    android:text="User Id" />
+                    android:text="User Age" />
                 <TextView
                     android:id="@+id/userAddress"
                     android:layout_width="match_parent"
@@ -87,7 +88,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/openMyServiceAccount"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
@@ -99,40 +100,46 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:text="My Service Account"
+                        android:paddingStart="12dp"
+                        android:drawableStart="@drawable/ic_baseline_account_circle_24"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="@color/black"
+                        android:text="My Service Provider Account"
                         android:textColor="@color/black"
-                        android:textSize="24dp"
+                        android:textSize="20dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/createMyServiceAccount"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_margin="8dp"
-                    android:visibility="gone"
+
                     android:background="@drawable/grey_btn_background"
                     android:elevation="8dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:text="Create Service Account"
+                        android:text="Create Service Provider Account"
+                        android:drawableStart="@drawable/ic_baseline_account_circle_24"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="@color/black"
                         android:textColor="@color/black"
-                        android:textSize="24dp"
+                        android:textSize="20dp"
                         android:textStyle="bold"
+                        android:paddingStart="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/editMyAccount"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/grey_btn_background"
                     android:elevation="8dp">
@@ -141,19 +148,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
+                        android:drawableStart="@drawable/ic_baseline_edit_24"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="@color/black"
+                        android:paddingStart="12dp"
                         android:text="Edit Account"
                         android:textColor="@color/black"
-                        android:textSize="24dp"
+                        android:textSize="20dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/shareApp"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/grey_btn_background"
                     android:elevation="8dp">
@@ -162,19 +172,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
+                        android:drawableStart="@drawable/ic_baseline_share_24"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="@color/black"
+                        android:paddingStart="12dp"
                         android:text="Share App"
                         android:textColor="@color/black"
-                        android:textSize="24dp"
+                        android:textSize="20dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/termsAndCondition"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/grey_btn_background"
                     android:elevation="8dp">
@@ -183,19 +196,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
+                        android:drawableStart="@drawable/terms_and_condition"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="@color/black"
+                        android:paddingStart="12dp"
                         android:text="Terms and condition"
                         android:textColor="@color/black"
-                        android:textSize="24dp"
+                        android:textSize="20dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/faqs"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_margin="8dp"
                     android:background="@drawable/grey_btn_background"
                     android:elevation="8dp">
@@ -204,12 +220,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
+                        android:drawableStart="@drawable/ic_baseline_question_mark_24"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="@color/black"
+                        android:paddingStart="12dp"
                         android:text="Faqs"
                         android:textColor="@color/black"
-                        android:textSize="24dp"
+                        android:textSize="20dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -217,7 +236,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/logoutAccount"
                     android:layout_width="200dp"
-                    android:layout_height="50dp"
+                    android:layout_height="60dp"
                     android:layout_margin="8dp"
                     android:layout_gravity="right"
                     android:background="@drawable/yellow_background"
@@ -228,6 +247,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:text="Logout"
+                        android:drawableStart="@drawable/ic_baseline_logout_24"
+                        android:drawablePadding="6dp"
+                        android:drawableTint="@color/black"
+                        android:paddingStart="12dp"
                         android:textColor="@color/black"
                         android:textSize="24dp"
                         android:textStyle="bold"

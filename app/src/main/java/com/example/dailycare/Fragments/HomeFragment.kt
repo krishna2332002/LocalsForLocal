@@ -1,8 +1,10 @@
 package com.example.dailycare.Fragments
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,6 +40,8 @@ class HomeFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private lateinit var user: User
     private lateinit var pinCode:String
+    private lateinit var dialog: ProgressDialog
+    private lateinit var timer: CountDownTimer
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +49,9 @@ class HomeFragment : Fragment() {
         binding=FragmentHomeBinding.inflate(inflater, container, false)
         fauth=FirebaseAuth.getInstance()
         database= FirebaseDatabase.getInstance().reference
+        dialog= ProgressDialog(context)
+        dialog.setMessage("Loading Services")
+        dialog.show()
         database.child("Profile").child(fauth.currentUser!!.uid).addListenerForSingleValueEvent(object:
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -53,11 +60,11 @@ class HomeFragment : Fragment() {
                     user= snapshot.getValue(User::class.java)!!
                     pinCode=user.pinCode.toString()
                     binding.userName.setText("Hi "+user.name)
-                    Toast.makeText(context, pinCode, Toast.LENGTH_SHORT).show()
                     serviceProviderView()
                 }
                 else
                 {
+                    dialog.cancel()
                     var intent= Intent(context, SetUpProfile::class.java)
                     startActivity(intent)
                 }
@@ -111,7 +118,7 @@ class HomeFragment : Fragment() {
                         serviceProviderList.add(rest)
                     }
                 }
-                Log.d("TAG", serviceProviderList.size.toString())
+                dialog.cancel()
                 serviceProviderAdapter.notifyDataSetChanged()
             }
             override fun onCancelled(error: DatabaseError) {
@@ -119,6 +126,29 @@ class HomeFragment : Fragment() {
             }
         })
 
+    }
+        private fun dialogShow(){
+        dialog= ProgressDialog(context)
+        dialog.setMessage("Loading Ranks...")
+        dialog.setCancelable(false)
+        dialog.show()
+        if(dialog.isShowing){
+            timer = object: CountDownTimer(10000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                }
+                override fun onFinish() {
+//                    dialog.dismiss()
+//                    Toast.makeText(context,"Network slow down ",Toast.LENGTH_SHORT).show()
+//                    binding.tryAgain.setVisibility(View.VISIBLE)
+//                    binding.tryAgain.setOnClickListener {
+//                        dialog.show()
+//                        fetchData()
+//                        binding.tryAgain.setVisibility(View.INVISIBLE)
+//                    }
+                }
+            }
+            timer.start()
+        }
     }
 
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_intro"
     tools:context=".Activities.SetUpProfile">
 
     <androidx.cardview.widget.CardView
@@ -22,7 +23,7 @@
         app:layout_constraintVertical_bias="0.498">
 
         <LinearLayout
-            android:layout_width="344dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center|center_horizontal"
             android:orientation="vertical">
@@ -61,8 +62,8 @@
                 android:layout_marginTop="10dp"
                 android:drawablePadding="10dp"
                 android:ems="10"
-                android:hint="Enter Your Address"
-                android:inputType="textPostalAddress"
+                android:hint="Enter Your Pincode"
+                android:inputType="number"
                 android:paddingStart="10dp"
                 tools:ignore="RtlSymmetry" />
 
@@ -124,7 +125,8 @@
         android:elevation="50dp"
         android:focusable="true"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

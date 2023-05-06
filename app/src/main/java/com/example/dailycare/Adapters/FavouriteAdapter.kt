@@ -26,11 +26,10 @@ class FavouriteAdapter (
         holder.itemView.apply {
             serviceProviderName.setText(serviceProvider.serviceProviderName)
             serviceName.setText(serviceProvider.serviceName)
-            var drawableResourceId=holder.itemView.context.resources.getIdentifier(serviceProvider.servicerPic,"drawable",holder.itemView.context.packageName)
             Glide.with(this)
-                .load(drawableResourceId)
+                .load(serviceProvider.servicerPic)
                 .override(1000, 1000)
-                .placeholder(R.drawable.burger)
+                .placeholder(R.drawable.profile)
                 .into(serviceProviderPic)
         }
     }

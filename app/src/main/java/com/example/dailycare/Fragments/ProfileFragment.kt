@@ -1,5 +1,6 @@
 package com.example.dailycare.Fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,9 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.example.dailycare.Activities.SelectService
-import com.example.dailycare.Activities.SetUpProfile
-import com.example.dailycare.Activities.SplashActivity
+import com.example.dailycare.Activities.*
 import com.example.dailycare.Models.User
 import com.example.dailycare.R
 import com.example.dailycare.databinding.FragmentProfileBinding
@@ -36,14 +35,15 @@ class ProfileFragment : Fragment() {
         database=FirebaseDatabase.getInstance().reference
 
         database.child("Profile").child(fauth.currentUser!!.uid).addValueEventListener(object :ValueEventListener{
+            @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists())
                 {
                     user= snapshot.getValue(User::class.java)!!
                     binding.userName.setText(user.name)
                     binding.userPhoneNo.setText(user.phoneNo)
-                    binding.userAddress.setText(user.address)
-                    binding.userId.setText(user.myId)
+                    binding.userAddress.setText("${user.address}, ${user.district}, ${user.state}")
+                    binding.userAge.setText("${user.age} years old")
                     Glide.with(requireContext())
                         .load(user.pic)
                         .override(1000, 1000)
@@ -56,10 +56,36 @@ class ProfileFragment : Fragment() {
                         startActivity(intent)
                         activity!!.finish()
                     }
+                    binding.faqs.setOnClickListener {
+                        var intent=Intent(context,FaqsActivity::class.java)
+                        startActivity(intent)
+                    }
+                    binding.shareApp.setOnClickListener {
+                        val appLink = "https://play.google.com/store/apps/details?id=com.example.dailycare"
+                        val intent = Intent(Intent.ACTION_SEND)
+                        intent.type = "text/plain"
+                        intent.putExtra(Intent.EXTRA_TEXT, appLink)
+                        startActivity(Intent.createChooser(intent, "Share link via"))
+                    }
+                    binding.editMyAccount.setOnClickListener {
+                        var intent=Intent(context,SetUpProfile::class.java)
+                        intent.putExtra("Value","1")
+                        startActivity(intent)
+                    }
+                    binding.openMyServiceAccount.setOnClickListener {
+                        var intent=Intent(context,ServiceProviderProfile::class.java)
+                        intent.putExtra("ServiceProviderUid",fauth.currentUser!!.uid)
+                        startActivity(intent)
+                    }
+                    binding.termsAndCondition.setOnClickListener {
+                        var intent=Intent(context,TermsActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
                 else
                 {
                     var intent= Intent(context, SetUpProfile::class.java)
+                    intent.putExtra("Value","1")
                     startActivity(intent)
                 }
             }

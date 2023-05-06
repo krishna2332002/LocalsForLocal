@@ -43,7 +43,9 @@ class NotificationsFragment : Fragment() {
                 ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.childrenCount==x){
-                        Toast.makeText(context, "No Current Notification", Toast.LENGTH_SHORT).show()
+                        binding.noDataFoundImg.visibility=View.VISIBLE
+                        binding.noDataFoundText.visibility=View.VISIBLE
+                        binding.notificationListView.visibility=View.GONE
                     }
                     else{
                         notificationsList.clear()
@@ -53,6 +55,9 @@ class NotificationsFragment : Fragment() {
                                 notificationsList.add(notification)
                             }
                         }
+                        binding.noDataFoundImg.visibility=View.GONE
+                        binding.noDataFoundText.visibility=View.GONE
+                        binding.notificationListView.visibility=View.VISIBLE
                         notificationsList.reverse()
                         notificationAdapter.notifyDataSetChanged()
 

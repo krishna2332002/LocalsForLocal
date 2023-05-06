@@ -6,19 +6,21 @@
         android:icon="@drawable/bottom_btn1"
         android:iconTint="@color/white"
         android:title="Home" />
+
     <item
         android:id="@+id/favorite"
         android:icon="@drawable/bottom_btn2"
         android:iconTint="@color/white"
         android:title="Favourite" />
     <item
-        android:id="@+id/notifications"
+        android:id="@+id/chat"
         android:icon="@drawable/bottom_btn3"
         android:iconTint="@color/white"
-        android:title="Notifications" />
+        android:title="Chat" />
     <item
         android:id="@+id/profile"
         android:icon="@drawable/bottom_btn4"
         android:iconTint="@color/white"
         android:title="Profile" />
+
 </menu>

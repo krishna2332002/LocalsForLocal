@@ -87,12 +87,13 @@ class CreateServiceProviderAccount : AppCompatActivity() {
                     binding.userExperience.text.toString())
 
                 database.child("ServiceProvidersList").child(fauth.currentUser!!.uid).setValue(provider).addOnSuccessListener {
-                    database.child("ServicesProvider").child(user!!.pinCode.toString()).child(fauth.currentUser!!.uid).setValue(provider)
-                       .addOnSuccessListener {
-                          Toast.makeText(this,"Congratulations you have been become a service Provider ", Toast.LENGTH_SHORT).show()
-                           var intent= Intent(this,MainActivity::class.java)
-                           startActivity(intent)
-                           finish()
+                    database.child("ServicesProvider").child(user!!.pinCode.toString()).child(fauth.currentUser!!.uid).setValue(provider).addOnSuccessListener {
+                           database.child("Services").child(serviceName).child(user!!.pinCode.toString()).child(fauth.currentUser!!.uid).setValue(provider).addOnSuccessListener {
+                               Toast.makeText(this, "Congratulations you have been become a service Provider ", Toast.LENGTH_SHORT).show()
+                               var intent = Intent(this, MainActivity::class.java)
+                               startActivity(intent)
+                               finish()
+                           }
                     }
                 }
             }
