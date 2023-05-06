@@ -24,6 +24,7 @@ class ServiceProviderProfile : AppCompatActivity() {
     private lateinit var binding:ActivityServiceProviderProfileBinding
     private lateinit var fauth:FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var database2: DatabaseReference
     private lateinit var serviceProvider: ServiceProvider
     private lateinit var user: User
     private lateinit var providerUid:String
@@ -34,6 +35,7 @@ class ServiceProviderProfile : AppCompatActivity() {
         setContentView(binding.root)
         fauth=FirebaseAuth.getInstance()
         database=FirebaseDatabase.getInstance().reference
+        database2=FirebaseDatabase.getInstance().reference
         providerUid= intent.getStringExtra("ServiceProviderUid").toString()
         Toast.makeText(this, providerUid, Toast.LENGTH_SHORT).show()
         database.child("ServiceProvidersList").child(providerUid).addValueEventListener(object :ValueEventListener{
@@ -81,13 +83,13 @@ class ServiceProviderProfile : AppCompatActivity() {
             }
 
         })
-        database.child("Profile").child(fauth.currentUser!!.uid).child("Favourites").child(providerUid).addListenerForSingleValueEvent(object :ValueEventListener{
+        database2.child("Profile").child(fauth.currentUser!!.uid).child("Favourites").child(providerUid).addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     binding.addToFavouriteServiceProvider.visibility=View.GONE
                     binding.removeFavouriteServiceProvider.visibility=View.VISIBLE
                     binding.removeFavouriteServiceProvider.setOnClickListener {
-                        database.child("Profile").child(fauth.currentUser!!.uid).child("Favourites").child(providerUid).setValue(null).addOnSuccessListener {
+                        database2.child("Profile").child(fauth.currentUser!!.uid).child("Favourites").child(providerUid).setValue(null).addOnSuccessListener {
                             Toast.makeText(this@ServiceProviderProfile, "Removed From Favourites", Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -95,7 +97,7 @@ class ServiceProviderProfile : AppCompatActivity() {
                     binding.addToFavouriteServiceProvider.visibility=View.VISIBLE
                     binding.removeFavouriteServiceProvider.visibility=View.GONE
                     binding.addToFavouriteServiceProvider.setOnClickListener {
-                    database.child("Profile").child(fauth.currentUser!!.uid).child("Favourites").child(providerUid).setValue(serviceProvider).addOnSuccessListener {
+                    database2.child("Profile").child(fauth.currentUser!!.uid).child("Favourites").child(providerUid).setValue(serviceProvider).addOnSuccessListener {
                         Toast.makeText(
                             this@ServiceProviderProfile,
                             "Added To Favourites",

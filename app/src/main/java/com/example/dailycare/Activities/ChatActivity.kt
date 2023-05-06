@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
     private lateinit var database: DatabaseReference
+    private lateinit var database2: DatabaseReference
     private lateinit var fauth: FirebaseAuth
     private lateinit var senderId: String
     private lateinit var receiverId: String
@@ -37,6 +38,7 @@ class ChatActivity : AppCompatActivity() {
         setContentView(binding.root)
         fauth=FirebaseAuth.getInstance()
         database= FirebaseDatabase.getInstance().reference
+        database2= FirebaseDatabase.getInstance().reference
         senderId=fauth.currentUser!!.uid
         receiverId=intent.getStringExtra("receiverUid").toString()
         receiverName=intent.getStringExtra("receiverName").toString()
@@ -63,7 +65,7 @@ class ChatActivity : AppCompatActivity() {
                 .into(binding.userChatImage)
             binding.title.text = receiverName
         }
-        database.child("Profile").child(senderId)
+        database2.child("Profile").child(senderId)
             .child("friend").child(receiverId).child("messages").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 messages.clear()
