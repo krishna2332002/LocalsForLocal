@@ -81,12 +81,13 @@ class CreateServiceProviderAccount : AppCompatActivity() {
             }
             else{
                 val provider:ServiceProvider= ServiceProvider(user!!.name,serviceName,fauth.currentUser!!.uid,0,0,user!!
-                    .pic,user!!.phoneNo,
+                    .image,user!!.phoneNo,
                     binding.userAlternativePhone.text.toString(),
                     binding.userDescription.text.toString(),
                     binding.userExperience.text.toString())
 
                 database.child("ServiceProvidersList").child(fauth.currentUser!!.uid).setValue(provider).addOnSuccessListener {
+                    Toast.makeText(this, user!!.pinCode.toString(), Toast.LENGTH_SHORT).show()
                     database.child("ServicesProvider").child(user!!.pinCode.toString()).child(fauth.currentUser!!.uid).setValue(provider).addOnSuccessListener {
                            database.child("Services").child(serviceName).child(user!!.pinCode.toString()).child(fauth.currentUser!!.uid).setValue(provider).addOnSuccessListener {
                                Toast.makeText(this, "Congratulations you have been become a service Provider ", Toast.LENGTH_SHORT).show()

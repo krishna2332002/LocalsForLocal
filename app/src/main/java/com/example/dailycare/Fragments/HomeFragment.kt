@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.dailycare.Activities.SetUpProfile
 import com.example.dailycare.Adapters.ServiceAdapter
 import com.example.dailycare.Adapters.ServiceProvidersAdapter
@@ -61,11 +62,16 @@ class HomeFragment : Fragment() {
                     pinCode=user.pinCode.toString()
                     binding.userName.setText("Hi "+user.name)
                     serviceProviderView()
+                    Glide.with(requireContext())
+                        .load(user.image)
+                        .override(1000, 1000)
+                        .placeholder(R.drawable.profile)
+                        .into(binding.userProfile)
                 }
                 else
                 {
                     dialog.cancel()
-                    var intent= Intent(context, SetUpProfile::class.java)
+                    val intent= Intent(context, SetUpProfile::class.java)
                     startActivity(intent)
                 }
             }

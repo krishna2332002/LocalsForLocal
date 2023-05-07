@@ -37,7 +37,6 @@ class ServiceProviderProfile : AppCompatActivity() {
         database=FirebaseDatabase.getInstance().reference
         database2=FirebaseDatabase.getInstance().reference
         providerUid= intent.getStringExtra("ServiceProviderUid").toString()
-        Toast.makeText(this, providerUid, Toast.LENGTH_SHORT).show()
         database.child("ServiceProvidersList").child(providerUid).addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
@@ -50,6 +49,7 @@ class ServiceProviderProfile : AppCompatActivity() {
                         .override(1000, 1000)
                         .placeholder(R.drawable.profile)
                         .into(binding.serviceProviderPic)
+
                     binding.completedWorkNo.setText(serviceProvider.completedWoks.toString())
                     binding.customersFavouriteNo.setText(serviceProvider.customersFavourite.toString())
                     binding.descriptionOfServiceProvider.setText(serviceProvider.description.toString())

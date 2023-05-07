@@ -62,15 +62,23 @@
                     app:layout_constraintTop_toBottomOf="@+id/userName" />
 
 
-                <ImageView
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/userProfile"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:layout_marginEnd="30dp"
+                    android:clickable="true"
+                    android:elevation="50dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/profile"
                     app:layout_constraintBottom_toBottomOf="@+id/userName"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/userName" />
+                    app:layout_constraintTop_toTopOf="@+id/userName"
+                    app:riv_border_color="#333333"
+                    app:riv_corner_radius="10dip"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="true"
+                    android:focusable="true" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"

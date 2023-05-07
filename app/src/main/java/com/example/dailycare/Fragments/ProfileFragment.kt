@@ -45,7 +45,7 @@ class ProfileFragment : Fragment() {
                     binding.userAddress.setText("${user.address}, ${user.district}, ${user.state}")
                     binding.userAge.setText("${user.age} years old")
                     Glide.with(requireContext())
-                        .load(user.pic)
+                        .load(user.image)
                         .override(1000, 1000)
                         .placeholder(R.drawable.profile)
                         .into(binding.userPic)
@@ -80,6 +80,9 @@ class ProfileFragment : Fragment() {
                     binding.termsAndCondition.setOnClickListener {
                         var intent=Intent(context,TermsActivity::class.java)
                         startActivity(intent)
+                    }
+                    binding.completeKyc.setOnClickListener {
+                        Toast.makeText(context, "Kyc is under development", Toast.LENGTH_SHORT).show()
                     }
                 }
                 else

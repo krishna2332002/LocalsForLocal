@@ -38,7 +38,7 @@ class FriendAdapter (
                                         serviceProviderName.setText(user!!.name)
                                         serviceName.setText(user.phoneNo)
                                         Glide.with(context)
-                                                .load(user.pic)
+                                                .load(user.image)
                                                 .override(1000, 1000)
                                                 .placeholder(R.drawable.profile)
                                                 .into(serviceProviderPic)
@@ -46,7 +46,7 @@ class FriendAdapter (
                                                 var intent=Intent(context,ChatActivity::class.java)
                                                 intent.putExtra("receiverUid",serviceProviderUid)
                                                 intent.putExtra("receiverName",user.name)
-                                                intent.putExtra("receiverPic",user.pic)
+                                                intent.putExtra("receiverPic",user.image)
                                                 context.startActivity(intent)
                                         }
                                 }
