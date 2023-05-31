@@ -1,15 +1,16 @@
 {
   "project_info": {
     "project_number": "238752134978",
+    "firebase_url": "https://localsforlocals-f1034-default-rtdb.firebaseio.com",
     "project_id": "localsforlocals-f1034",
     "storage_bucket": "localsforlocals-f1034.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:238752134978:android:7f3063c9e565ac5387fadb",
+        "mobilesdk_app_id": "1:238752134978:android:4f134190715b97f887fadb",
         "android_client_info": {
-          "package_name": "com.example.dailycare"
+          "package_name": "com.localsforlocal.dailycare"
         }
       },
       "oauth_client": [

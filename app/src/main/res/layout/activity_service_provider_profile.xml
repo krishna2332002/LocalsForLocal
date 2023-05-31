@@ -177,7 +177,8 @@
                         android:id="@+id/messageServiceProvider"
                         android:layout_width="0dp"
                         android:layout_height="60dp"
-                        android:layout_margin="15dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/grey_btn_background"
                         android:elevation="8dp">
@@ -200,7 +201,8 @@
                         android:id="@+id/callServiceProvider"
                         android:layout_width="0dp"
                         android:layout_height="60dp"
-                        android:layout_margin="15dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/yellow_background"
                         android:drawablePadding="5dp"
@@ -208,6 +210,54 @@
                         android:gravity="center"
                         android:padding="8dp"
                         android:text="Call"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/workDoneServiceProvider"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/grey_btn_background"
+                        android:elevation="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:text="Work Done"
+                            android:textColor="@color/black"
+                            android:textSize="24dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/agreementServiceProvider"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/yellow_background"
+                        android:drawablePadding="5dp"
+                        android:elevation="8dp"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="Agreement"
                         android:textColor="@color/white"
                         android:textSize="24sp"
                         android:textStyle="bold" />

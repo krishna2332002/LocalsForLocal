@@ -4,6 +4,31 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="state">State*</string>
     <string name="district">District*</string>
+    <string-array name="array_type_of_job">
+        <item>Select Service type</item>
+        <item>Accountant</item>
+        <item>Barber</item>
+        <item>Carpenter</item>
+        <item>Painter</item>
+        <item>Photo Editor</item>
+        <item>Cook</item>
+        <item>Driver</item>
+        <item>Electrician</item>
+        <item>Painter</item>
+        <item>Photographer</item>
+        <item>Plumber</item>
+        <item>Artist</item>
+        <item>Dancer</item>
+        <item>Singer</item>
+        <item>Peon</item>
+        <item>Maid Servant</item>
+        <item>Sweeper</item>
+        <item>Cook</item>
+        <item>Labour</item>
+        <item>Teacher</item>
+        <item>Merchant</item>
+        <item>Others</item>
+    </string-array>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>

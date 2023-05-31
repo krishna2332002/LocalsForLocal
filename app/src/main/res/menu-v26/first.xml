@@ -17,6 +17,11 @@
         android:iconTint="@color/white"
         android:title="Chat" />
     <item
+        android:id="@+id/post"
+        android:icon="@drawable/bottom_btn2"
+        android:iconTint="@color/white"
+        android:title="Posts" />
+    <item
         android:id="@+id/profile"
         android:icon="@drawable/bottom_btn4"
         android:iconTint="@color/white"
