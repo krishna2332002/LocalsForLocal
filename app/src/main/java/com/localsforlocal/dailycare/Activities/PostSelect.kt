@@ -352,7 +352,7 @@ class PostSelect : AppCompatActivity() {
             if(user!=null){
                 var rand = database.push().key.toString()
                 var post= Post(binding.noOfVacancies.text.toString(),binding.jobAddress.text.toString(),binding.expectedSalary.text.toString(),binding.postCaption.text.toString(),
-                    fAuth.currentUser!!.uid,user!!.name,user!!.image,selectedDistrict,selectedState,selectedJob,rand,0,"",binding.jobTimings.toString())
+                    fAuth.currentUser!!.uid,user!!.name,user!!.image,selectedDistrict,selectedState,selectedJob,rand,0,"",binding.jobTimings.text.toString())
                 database.child("Post").child(user!!.pinCode.toString()).child(rand).setValue(post).addOnSuccessListener {
                     Toast.makeText(this, "Service Vacancies Uploaded", Toast.LENGTH_SHORT).show()
                     var intent= Intent(this,MainActivity::class.java)

@@ -38,7 +38,15 @@ class PostAdapter (private var context: Context, private var postList:ArrayList<
             postDescription.setText("Description: "+post.description)
             postJobLocation.setText("Address: "+post.jobAddress)
             postExpectedSalary.setText("Quotation : "+post.expectedSalary)
-            postJobTimings.setText("Timing: "+post.jobTime)
+            if(post.expectedSalary!=null)
+                postExpectedSalary.setText("Quotation : "+post.expectedSalary)
+            else
+                postExpectedSalary.setText("Quotation : "+"Not Provided")
+            if(post.jobTime!=null)
+                postJobTimings.setText("Timing: "+post.jobTime)
+            else
+                postJobTimings.setText("Timing: "+"Not Provided")
+
             jobAppliedBtn.setText(post.applies.toString())
             Glide.with(this)
                 .load(post.jobProviderImage)
